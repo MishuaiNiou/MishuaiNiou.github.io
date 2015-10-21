@@ -1,0 +1,449 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Android的Tab导航主界面 | 我的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="MiShuai">
+    
+
+    
+    <meta name="description" content="废话不多说，先看效果
+
+这是很经典的Android APP主界面导航设计，这次的效果是实现了点击界面底部的tab实现APP的主界面导航，不支持横向的左右滑动，在下一次的博客中，我会同样实现这个界面，并且使这个tab主界面可以左右横向滑动导航。
+首先来说一下我实现这种效果的思路吧。首先，在MainActivity中使用    requestWindowFeature(Window.FEATURE_N">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android的Tab导航主界面">
+<meta property="og:url" content="http://yoursite.com/2015/06/09/Android的Tab导航主界面/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="废话不多说，先看效果
+
+这是很经典的Android APP主界面导航设计，这次的效果是实现了点击界面底部的tab实现APP的主界面导航，不支持横向的左右滑动，在下一次的博客中，我会同样实现这个界面，并且使这个tab主界面可以左右横向滑动导航。
+首先来说一下我实现这种效果的思路吧。首先，在MainActivity中使用    requestWindowFeature(Window.FEATURE_N">
+<meta property="og:image" content="http://yoursite.com/img/FragmentTab/FragmentTab.gif">
+<meta property="og:updated_time" content="2015-10-21T13:34:04.234Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android的Tab导航主界面">
+<meta name="twitter:description" content="废话不多说，先看效果
+
+这是很经典的Android APP主界面导航设计，这次的效果是实现了点击界面底部的tab实现APP的主界面导航，不支持横向的左右滑动，在下一次的博客中，我会同样实现这个界面，并且使这个tab主界面可以左右横向滑动导航。
+首先来说一下我实现这种效果的思路吧。首先，在MainActivity中使用    requestWindowFeature(Window.FEATURE_N">
+
+    
+    <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/android1.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/android1.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/android1.png" alt="我的博客" title="我的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="我的博客">我的博客</a></h1>
+				<h2 class="blog-motto">眼界决定境界，态度决定高度，思路决定出路</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about-me">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/09/Android的Tab导航主界面/" title="Android的Tab导航主界面" itemprop="url">Android的Tab导航主界面</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="MiShuai" target="_blank" itemprop="author">MiShuai</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-08T17:22:52.000Z" itemprop="datePublished"> 发表于 2015-06-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>废话不多说，先看效果</p>
+<p><img src="/img/FragmentTab/FragmentTab.gif" alt=""></p>
+<p>这是很经典的Android APP主界面导航设计，这次的效果是实现了点击界面底部的tab实现APP的主界面导航，不支持横向的左右滑动，在下一次的博客中，我会同样实现这个界面，并且使这个tab主界面可以左右横向滑动导航。</p>
+<p>首先来说一下我实现这种效果的思路吧。首先，在MainActivity中使用<br>    requestWindowFeature(Window.FEATURE_NO_TITLE);<br>这行代码去掉系统自带的ActionBar,然后在布局文件中写一个top.xml，使用线性布局实现顶部标题栏的效果，然后同理写一个bottom.xml，在一个水平方向的线性布局中嵌入四个垂直方向的线性布局，水平方向的布局使用layout_weight属性横向分成4等分，垂直的四个线性布局中分别嵌入一个ImageView和一个TextView，这样底部的tab界面就很容易的实现了。在主布局中使用垂直线性布局，上方使用include嵌入top.xml，底部嵌入bottom.xml，屏幕中间剩余部分使用FrameLayout填充满就OK了，至此主界面布局就大体实现了。</p>
+<p>主界面布局代码如下，将头部标题栏和底部底部导航栏抽取出来用include嵌入优点是可以实现布局的重用</p>
+<pre><code><span class="comment"><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">LinearLayout</span> </span><br><span class="line">   	<span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">	<span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span></span><br><span class="line">	<span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">	<span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">	<span class="attribute">android:orientation</span>=<span class="value">"vertical"</span></span><br><span class="line">	<span class="attribute">tools:context</span>=<span class="value">"$&#123;relativePackage&#125;.$&#123;activityClass&#125;"</span> &gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  		<span class="tag">&lt;<span class="title">include</span> <span class="attribute">layout</span>=<span class="value">"@layout/top"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">FrameLayout</span> </span><br><span class="line">        <span class="attribute">android:id</span>=<span class="value">"@+id/id_content"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"0dp"</span></span><br><span class="line">        <span class="attribute">android:layout_weight</span>=<span class="value">"1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">FrameLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">include</span> <span class="attribute">layout</span>=<span class="value">"@layout/bottom"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></span>
+</code></pre><p>接下来，如何实现点击导航的功能呢？我在这里使用的是Fragment，共有4个Fragment，一个Fragment对应一个tab，将fragment添加到FrameLayout中。要实现点击导航的功能，首先要使点击的tab与其对应的fragment关联起来，那么如何关联呢？我们知道Fragment是嵌入在Activity中的，在activity中如何管理这些fragment是个问题，但是好在谷歌官方提供了用来管理fragment的工具，那就是FragmentManager，获取了FragmentManager之后，再使用官方提供的FragmentTransaction就可以实现对fragment的添加、隐藏、显示、删除和替换等操作了，这样我们就可以实现点击tab跳转到对应的fragment了。除跳转对应的fragment之外，底部被选中的tab还需要显示为亮色。</p>
+<p>MainActivity中代码如下：</p>
+<pre><code><span class="comment"><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">FragmentActivity</span> <span class="keyword">implements</span> <span class="title">OnClickListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> LinearLayout tab01;</span><br><span class="line">	<span class="keyword">private</span> LinearLayout tab02;</span><br><span class="line">	<span class="keyword">private</span> LinearLayout tab03;</span><br><span class="line">	<span class="keyword">private</span> LinearLayout tab04;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> ImageView imgMessage;</span><br><span class="line">	<span class="keyword">private</span> ImageView imgFriend;</span><br><span class="line">	<span class="keyword">private</span> ImageView imgContact;</span><br><span class="line">	<span class="keyword">private</span> ImageView imgSetting;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Fragment message;</span><br><span class="line">	<span class="keyword">private</span> Fragment friend;</span><br><span class="line">	<span class="keyword">private</span> Fragment contact;</span><br><span class="line">	<span class="keyword">private</span> Fragment setting;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		requestWindowFeature(Window.FEATURE_NO_TITLE);</span><br><span class="line">		setContentView(R.layout.activity_main);</span><br><span class="line">		initView();</span><br><span class="line">		setListener();</span><br><span class="line">		setSelected(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 将选中的tab与其对应Fragment关联起来,并将选中tab的图片颜色置为亮色</span><br><span class="line">	 * </span><br><span class="line">	 * <span class="doctag">@param</span> i</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">setSelected</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">		FragmentManager fm = getSupportFragmentManager();</span><br><span class="line">		FragmentTransaction transaction = fm.beginTransaction();</span><br><span class="line">		hideFragment(transaction);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">switch</span> (i) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">			<span class="keyword">if</span>(message==<span class="keyword">null</span>)&#123;</span><br><span class="line">				message = <span class="keyword">new</span> MessageFragment();</span><br><span class="line">				transaction.add(R.id.id_content, message);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				transaction.show(message);</span><br><span class="line">			&#125;</span><br><span class="line">			imgMessage.setImageResource(R.drawable.tab_messages_pressed);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			<span class="keyword">if</span>(friend==<span class="keyword">null</span>)&#123;</span><br><span class="line">				friend = <span class="keyword">new</span> FriendFragment();</span><br><span class="line">				transaction.add(R.id.id_content, friend);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				transaction.show(friend);</span><br><span class="line">			&#125;</span><br><span class="line">			imgFriend.setImageResource(R.drawable.tab_friends_pressed);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			<span class="keyword">if</span>(contact==<span class="keyword">null</span>)&#123;</span><br><span class="line">				contact = <span class="keyword">new</span> ContactFragment();</span><br><span class="line">				transaction.add(R.id.id_content, contact);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				transaction.show(contact);</span><br><span class="line">			&#125;</span><br><span class="line">			imgContact.setImageResource(R.drawable.tab_contact_pressed);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">			<span class="keyword">if</span>(setting==<span class="keyword">null</span>)&#123;</span><br><span class="line">				setting = <span class="keyword">new</span> SettingFragment();</span><br><span class="line">				transaction.add(R.id.id_content, setting);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				transaction.show(setting);</span><br><span class="line">			&#125;</span><br><span class="line">			imgSetting.setImageResource(R.drawable.tab_settings_pressed);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		transaction.commit();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 如果其他未被选中的fragment不为空，则隐藏</span><br><span class="line">	 * </span><br><span class="line">	 * <span class="doctag">@param</span> transaction</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">hideFragment</span><span class="params">(FragmentTransaction transaction)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(message!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			transaction.hide(message);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(friend!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			transaction.hide(friend);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(contact!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			transaction.hide(contact);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(setting!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			transaction.hide(setting);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 设置事件监听</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">setListener</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		tab01.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">		tab02.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">		tab03.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">		tab04.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 初始化view</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		tab01 = (LinearLayout) findViewById(R.id.id_tab01);</span><br><span class="line">		tab02 = (LinearLayout) findViewById(R.id.id_tab02);</span><br><span class="line">		tab03 = (LinearLayout) findViewById(R.id.id_tab03);</span><br><span class="line">		tab04 = (LinearLayout) findViewById(R.id.id_tab04);</span><br><span class="line"></span><br><span class="line">		imgMessage = (ImageView) findViewById(R.id.img_tab01);</span><br><span class="line">		imgFriend = (ImageView) findViewById(R.id.img_tab02);</span><br><span class="line">		imgContact = (ImageView) findViewById(R.id.img_tab03);</span><br><span class="line">		imgSetting = (ImageView) findViewById(R.id.img_tab04);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">		resetImgs();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">switch</span> (v.getId()) &#123;</span><br><span class="line">		<span class="keyword">case</span> R.id.id_tab01:</span><br><span class="line">			setSelected(0);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">case</span> R.id.id_tab02:</span><br><span class="line">			setSelected(1);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> R.id.id_tab03:</span><br><span class="line">			setSelected(2);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> R.id.id_tab04:</span><br><span class="line">			setSelected(3);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 重置tab图片颜色为暗色</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">resetImgs</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		imgMessage.setImageResource(R.drawable.tab_messages_normal);</span><br><span class="line">		imgFriend.setImageResource(R.drawable.tab_friends_normal);</span><br><span class="line">		imgContact.setImageResource(R.drawable.tab_contact_normal);</span><br><span class="line">		imgSetting.setImageResource(R.drawable.tab_settings_normal);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
+</code></pre><p><strong>注意：导入Fragment的包时要导入android.support.v4.app.Fragment的包</strong></p>
+<p><strong><em>建议：可以将Fragment共有的特性抽取出来，写一个BaseFragment，然后其余的4个Fragment去继承这个BaseFragment，在各自的Fragment中去实现各自的功能就行了。</em></strong></p>
+<p>这样，一个经典的Android主界面Tab导航就实现了，这个是不能实现左右滑动导航的，下一次的博文中，我会在本次效果的基础上加上左右滑动导航的功能。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Android/">Android</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/06/09/Android的Tab导航主界面/" data-title="Android的Tab导航主界面 | 我的博客" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/06/27/Android的Tab滑动导航主界面/" title="Android的Tab滑动导航主界面">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Android的Tab滑动导航主界面</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/06/01/MarkDown新手指南/"  title="Markdown新手指南">
+ <strong>下一篇：</strong><br/> 
+ <span>Markdown新手指南
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://github.com/MishuaiNiou" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Michael . I&#39;m an android developer .  <br/>
+			Stay hungry , Stay foolish ! </p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="MiShuai">MiShuai</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
