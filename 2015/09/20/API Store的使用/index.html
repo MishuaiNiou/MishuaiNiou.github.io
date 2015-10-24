@@ -1,0 +1,509 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Api Store的使用 | 我的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="MiShuai">
+    
+
+    
+    <meta name="description" content="Android客户端与服务器端通信一个人来做是比较麻烦的，因为不仅要掌握客户端开发的知识，还要掌握服务器端的知识。一般服务器传输数据到android客户端的思路是：首先写好服务器端，然后再将需要传输到android客户端的数据在servlet中封装成json的格式，最后在android客户端通过URLConnection或者HttpClient向服务器端请求数据，将服务器端封装好的json数据解析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Api Store的使用">
+<meta property="og:url" content="http://yoursite.com/2015/09/20/API Store的使用/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="Android客户端与服务器端通信一个人来做是比较麻烦的，因为不仅要掌握客户端开发的知识，还要掌握服务器端的知识。一般服务器传输数据到android客户端的思路是：首先写好服务器端，然后再将需要传输到android客户端的数据在servlet中封装成json的格式，最后在android客户端通过URLConnection或者HttpClient向服务器端请求数据，将服务器端封装好的json数据解析">
+<meta property="og:updated_time" content="2015-10-24T14:29:19.285Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Api Store的使用">
+<meta name="twitter:description" content="Android客户端与服务器端通信一个人来做是比较麻烦的，因为不仅要掌握客户端开发的知识，还要掌握服务器端的知识。一般服务器传输数据到android客户端的思路是：首先写好服务器端，然后再将需要传输到android客户端的数据在servlet中封装成json的格式，最后在android客户端通过URLConnection或者HttpClient向服务器端请求数据，将服务器端封装好的json数据解析">
+
+    
+    <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/android1.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/android1.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/android1.png" alt="我的博客" title="我的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="我的博客">我的博客</a></h1>
+				<h2 class="blog-motto">眼界决定境界，态度决定高度，思路决定出路</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about-me">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/20/API Store的使用/" title="Api Store的使用" itemprop="url">Api Store的使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="MiShuai" target="_blank" itemprop="author">MiShuai</a>
+		
+  <p class="article-time">
+    <time datetime="2015-09-20T07:39:52.000Z" itemprop="datePublished"> 发表于 2015-09-20</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>Android客户端与服务器端通信一个人来做是比较麻烦的，因为不仅要掌握客户端开发的知识，还要掌握服务器端的知识。<br>一般服务器传输数据到android客户端的思路是：首先写好服务器端，然后再将需要传输到android客户端的数据在servlet中封装成json的格式，最后在android客户端通过URLConnection或者HttpClient向服务器端请求数据，将服务器端封装好的json数据解析出来显示到UI界面中。</p>
+<p>如果想快速的写出一款android客户端APP，百度的Api Store对于只会android客户端开发而对服务器端开发不熟的开发者来说真是一个福音。</p>
+<p>Api Store是由百度出品，是一个连接服务商与开发者的第三方API分发平台。平台已汇集了国内外应用开发所需的Android/IOS API和SDK等800个服务，特有百度独家的检索抓取、语音图像、地图翻译等服务。首创即用API模式，使用百度账号即可调用平台内所有即用API，让开发工作如此简单。百度专区汇集了百度独家的文字识别（OCR）、百度地图、百度语音、百度翻译、百度云、百度站内搜索等服务；另免费提供天气、PM2.5、股票、IP地址、身份证等常用生活查询服务。</p>
+<p><strong>简而言之，有专门的服务商提供专门的服务，将他们想要提供的数据经过整理后封装成了json格式，并放在了Api Store上，开发者只要有百度账号，登录后就可通过服务商给出的URL地址和API文档获取免费的数据，android开发者就只需要按照文档解析json数据就OK了，省去了大量服务器端的工作，而这些复杂繁琐的工作服务商已经做好了，那么android开发者就可以快速开发APP了。</strong></p>
+<p>下面我举一个开发android新闻客户端的例子。</p>
+<p>假如我想开发一款android新闻客户端的APP，那么，我原始的想法是：先写服务器端，用爬虫工具去爬取不同类别的新闻，爬取完后存储到数据库中，再将数据从数据库中取出在servlet中封装成json格式，android客户端再根据servlet的地址获取json格式数据并解析显示到界面上。这样的话，由于新闻每天都在变，所以数据库中的信息需要不停的更新，这是比较麻烦的；再就是爬虫框架的爬取策略，如何爬取才能爬取到最热门和最有价值的新闻，这又是一门学问了。所以，想做好是比较麻烦的。</p>
+<p>现在使用Api Store之后，服务器端的新闻内容服务商已经帮忙筛选好了，并且也封装好了，每隔几个小时也会自动更新新闻，而android开发者就可以专注于移动端的开发了，根据服务商提供的文档直接解析封装好的json数据就OK了，多么方便啊！</p>
+<p>接下来，说一下使用百度Api Store的大体步骤：</p>
+<p>首先，你需要有百度的账号。登陆之后，搜索一下你需要的服务，例如我搜索新闻，会搜到很多种类的新闻，我选择了科技类新闻，进去后可以看到有提供好了的Api文档和各种编程语言示例。百度还会分给你一个apikey，这可能会需要手机认证之后才会看到。</p>
+<p>可以看到服务商封装的新闻的json格式如下：</p>
+<pre><code>{
+    "<span class="attribute">0</span>": <span class="value">{
+        "<span class="attribute">time</span>": <span class="value"><span class="string">"2015-09-09 07:29"</span></span>,
+        "<span class="attribute">title</span>": <span class="value"><span class="string">"阿里巴巴下调第二财季GMV预期致股价逆市下跌"</span></span>,
+        "<span class="attribute">description</span>": <span class="value"><span class="string">"阿里巴巴下调第二财季GMV预期致股价逆市下跌..."</span></span>,
+        "<span class="attribute">picUrl</span>": <span class="value"><span class="string">"http://img1.gtimg.com/tech/pics/hv1/221/175/1919/124827821.jpg"</span></span>,
+        "<span class="attribute">url</span>": <span class="value"><span class="string">"http://tech.qq.com/a/20150909/009294.htm"</span>
+    </span>}</span>,
+    "<span class="attribute">1</span>": <span class="value">{
+        "<span class="attribute">time</span>": <span class="value"><span class="string">"2015-09-09 07:22"</span></span>,
+        "<span class="attribute">title</span>": <span class="value"><span class="string">"音乐巨头Pandora创新：付一美元免广告听一天"</span></span>,
+        "<span class="attribute">description</span>": <span class="value"><span class="string">"音乐巨头Pandora创新：付一美元免广告听一天..."</span></span>,
+        "<span class="attribute">picUrl</span>": <span class="value"><span class="string">"http://mat1.gtimg.com/tech/00Jamesdu/2014/index/remark/2.png"</span></span>,
+        "<span class="attribute">url</span>": <span class="value"><span class="string">"http://tech.qq.com/a/20150909/009019.htm"</span>
+    </span>}</span>,
+    "<span class="attribute">2</span>": <span class="value">{
+        "<span class="attribute">time</span>": <span class="value"><span class="string">"2015-09-09 07:15"</span></span>,
+        "<span class="attribute">title</span>": <span class="value"><span class="string">"奇虎酷派冲突凸显中国智能手机市场竞争惨烈"</span></span>,
+        "<span class="attribute">description</span>": <span class="value"><span class="string">"奇虎酷派冲突凸显中国智能手机市场竞争惨烈..."</span></span>,
+        "<span class="attribute">picUrl</span>": <span class="value"><span class="string">"http://img1.gtimg.com/tech/pics/hv1/28/173/1919/124827118.jpg"</span></span>,
+        "<span class="attribute">url</span>": <span class="value"><span class="string">"http://tech.qq.com/a/20150909/008706.htm"</span>
+    </span>}</span>,
+    "<span class="attribute">3</span>": <span class="value">{
+        "<span class="attribute">time</span>": <span class="value"><span class="string">"2015-09-09 07:09"</span></span>,
+        "<span class="attribute">title</span>": <span class="value"><span class="string">"苹果微软与美国政府展开数据访问法律大战"</span></span>,
+        "<span class="attribute">description</span>": <span class="value"><span class="string">"苹果微软与美国政府展开数据访问法律大战..."</span></span>,
+        "<span class="attribute">picUrl</span>": <span class="value"><span class="string">"http://mat1.gtimg.com/tech/00Jamesdu/2014/index/remark/2.png"</span></span>,
+        "<span class="attribute">url</span>": <span class="value"><span class="string">"http://tech.qq.com/a/20150909/008461.htm"</span>
+    </span>}</span>,
+    "<span class="attribute">4</span>": <span class="value">{
+        "<span class="attribute">time</span>": <span class="value"><span class="string">"2015-09-09 07:02"</span></span>,
+        "<span class="attribute">title</span>": <span class="value"><span class="string">"iPhone也创新才尽？不妨学学这些炫酷概念机"</span></span>,
+        "<span class="attribute">description</span>": <span class="value"><span class="string">"iPhone也创新才尽？不妨学学这些炫酷概念机..."</span></span>,
+        "<span class="attribute">picUrl</span>": <span class="value"><span class="string">"http://img1.gtimg.com/tech/pics/hv1/81/171/1919/124826661.jpg"</span></span>,
+        "<span class="attribute">url</span>": <span class="value"><span class="string">"http://tech.qq.com/a/20150909/007852.htm"</span>
+    </span>}</span>,
+    "<span class="attribute">5</span>": <span class="value">{
+        "<span class="attribute">time</span>": <span class="value"><span class="string">"2015-09-09 06:12"</span></span>,
+        "<span class="attribute">title</span>": <span class="value"><span class="string">"美国国税局驳回雅虎免税分拆阿里股权计划"</span></span>,
+        "<span class="attribute">description</span>": <span class="value"><span class="string">"美国国税局驳回雅虎免税分拆阿里股权计划..."</span></span>,
+        "<span class="attribute">picUrl</span>": <span class="value"><span class="string">"http://mat1.gtimg.com/tech/00Jamesdu/2014/index/remark/2.png"</span></span>,
+        "<span class="attribute">url</span>": <span class="value"><span class="string">"http://tech.qq.com/a/20150909/006970.htm"</span>
+    </span>}</span>,
+    "<span class="attribute">6</span>": <span class="value">{
+        "<span class="attribute">time</span>": <span class="value"><span class="string">"2015-09-09 05:50"</span></span>,
+        "<span class="attribute">title</span>": <span class="value"><span class="string">"阿里市值缩水腾讯成亚洲最大互联网公司"</span></span>,
+        "<span class="attribute">description</span>": <span class="value"><span class="string">"阿里市值缩水腾讯成亚洲最大互联网公司..."</span></span>,
+        "<span class="attribute">picUrl</span>": <span class="value"><span class="string">"http://img1.gtimg.com/tech/pics/hv1/127/170/1919/124826452.jpg"</span></span>,
+        "<span class="attribute">url</span>": <span class="value"><span class="string">"http://tech.qq.com/a/20150909/006447.htm"</span>
+    </span>}</span>,
+    "<span class="attribute">7</span>": <span class="value">{
+        "<span class="attribute">time</span>": <span class="value"><span class="string">"2015-09-09 05:13"</span></span>,
+        "<span class="attribute">title</span>": <span class="value"><span class="string">"Airbnb的LOGO原来出自二十多年前商标设计图册"</span></span>,
+        "<span class="attribute">description</span>": <span class="value"><span class="string">"Airbnb的LOGO原来出自二十多年前商标设计图册..."</span></span>,
+        "<span class="attribute">picUrl</span>": <span class="value"><span class="string">"http://mat1.gtimg.com/tech/00Jamesdu/2014/index/remark/2.png"</span></span>,
+        "<span class="attribute">url</span>": <span class="value"><span class="string">"http://tech.qq.com/a/20150909/005811.htm"</span>
+    </span>}</span>,
+    "<span class="attribute">8</span>": <span class="value">{
+        "<span class="attribute">time</span>": <span class="value"><span class="string">"2015-09-09 01:42"</span></span>,
+        "<span class="attribute">title</span>": <span class="value"><span class="string">"“滴滴打车”正式更名为“滴滴出行”"</span></span>,
+        "<span class="attribute">description</span>": <span class="value"><span class="string">"“滴滴打车”正式更名为“滴滴出行”..."</span></span>,
+        "<span class="attribute">picUrl</span>": <span class="value"><span class="string">"http://img1.gtimg.com/tech/pics/hv1/186/156/1919/124822941.jpg"</span></span>,
+        "<span class="attribute">url</span>": <span class="value"><span class="string">"http://tech.qq.com/a/20150909/001884.htm"</span>
+    </span>}</span>,
+    "<span class="attribute">9</span>": <span class="value">{
+        "<span class="attribute">time</span>": <span class="value"><span class="string">"2015-09-08 22:32"</span></span>,
+        "<span class="attribute">title</span>": <span class="value"><span class="string">"酷派高管：周鸿&amp;#31054;出尔反尔 曾欢迎乐视入股"</span></span>,
+        "<span class="attribute">description</span>": <span class="value"><span class="string">"酷派高管：周鸿&amp;#31054;出尔反尔 曾欢迎乐视入股..."</span></span>,
+        "<span class="attribute">picUrl</span>": <span class="value"><span class="string">"http://img1.gtimg.com/tech/pics/hv1/85/152/1919/124821820.jpg"</span></span>,
+        "<span class="attribute">url</span>": <span class="value"><span class="string">"http://tech.qq.com/a/20150908/059113.htm"</span>
+    </span>}</span>,
+    "<span class="attribute">code</span>": <span class="value"><span class="number">200</span></span>,
+    "<span class="attribute">msg</span>": <span class="value"><span class="string">"ok"</span>
+</span>}
+</code></pre><p>由此可以看出，默认返回10条新闻数据，返回的一条新闻包含新闻的日期（time）、新闻的标题（title）、新闻的简介（description）、新闻图片的url地址（picUrl）和新闻详情的url地址（url）。<br>那么我们可以在一个异步任务中去请求并解析json数据，将解析的10条新闻存储到list中，新闻的标题和简介等属性存储到map中。图片的下载显示使用上次提到的Universal ImageLoader异步加载类库，最后在UI界面以listview的形式展示出来。</p>
+<p>将api示例中给出获取数据的代码稍作修改，放到异步任务中请求获取数据并解析存储到list中，代码如下：</p>
+<pre><code><span class="comment"><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">class ApiStoreData extends</span><br><span class="line">	AsyncTask&lt;<span class="keyword">String</span>, Void, List&lt;Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt;&gt;&gt; &#123;</span><br><span class="line"></span><br><span class="line">	List&lt;Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt;&gt; resultList;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> ApiStoreData(List&lt;Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt;&gt; list) &#123;</span><br><span class="line">		resultList = list;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> onPreExecute() &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">super</span>.onPreExecute();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	<span class="keyword">protected</span> List&lt;Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt;&gt; doInBackground(<span class="keyword">String</span>... params) &#123;</span><br><span class="line">		<span class="keyword">String</span> httpUrl = params[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">String</span> httpArg = params[<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">BufferedReader</span> reader = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">String</span> jsonResult = <span class="keyword">null</span>;</span><br><span class="line">		StringBuffer sbf = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">		httpUrl = httpUrl + <span class="string">"?"</span> + httpArg;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			URL url = <span class="keyword">new</span> URL(httpUrl);</span><br><span class="line">			HttpURLConnection connection = (HttpURLConnection) url</span><br><span class="line">					.openConnection();</span><br><span class="line">			connection.setRequestMethod(<span class="string">"GET"</span>);</span><br><span class="line">			<span class="comment">// 填入apikey到HTTP header</span></span><br><span class="line">			connection.setRequestProperty(<span class="string">"apikey"</span>,</span><br><span class="line">					<span class="string">"你的百度apikey"</span>);</span><br><span class="line">			connection.connect();</span><br><span class="line">			InputStream is = connection.getInputStream();</span><br><span class="line">			reader = <span class="keyword">new</span> <span class="keyword">BufferedReader</span>(<span class="keyword">new</span> InputStreamReader(is, <span class="string">"UTF-8"</span>));</span><br><span class="line">			<span class="keyword">String</span> strRead = <span class="keyword">null</span>;</span><br><span class="line">			<span class="keyword">while</span> ((strRead = reader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">				sbf.<span class="built_in">append</span>(strRead);</span><br><span class="line">				sbf.<span class="built_in">append</span>(<span class="string">"\r\n"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			reader.close();</span><br><span class="line">			jsonResult = sbf.toString();</span><br><span class="line">			<span class="comment">// Log.i("--??", jsonResult);</span></span><br><span class="line"></span><br><span class="line">			<span class="comment">// 将json数据存入list集合</span></span><br><span class="line">			<span class="keyword">JSONObject</span> root = <span class="keyword">new</span> <span class="keyword">JSONObject</span>(jsonResult);</span><br><span class="line">			<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; number; i++) &#123;</span><br><span class="line">				<span class="keyword">JSONObject</span> content = root.getJSONObject(i + <span class="string">""</span>);</span><br><span class="line">				Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; <span class="built_in">map</span> = <span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt;();</span><br><span class="line">				<span class="built_in">map</span>.put(<span class="string">"time"</span>, content.getString(<span class="string">"time"</span>));</span><br><span class="line">				<span class="built_in">map</span>.put(<span class="string">"title"</span>, content.getString(<span class="string">"title"</span>));</span><br><span class="line">				<span class="built_in">map</span>.put(<span class="string">"description"</span>, content.getString(<span class="string">"description"</span>));</span><br><span class="line">				<span class="built_in">map</span>.put(<span class="string">"picUrl"</span>, content.getString(<span class="string">"picUrl"</span>));</span><br><span class="line">				<span class="built_in">map</span>.put(<span class="string">"url"</span>, content.getString(<span class="string">"url"</span>));</span><br><span class="line">				resultList.<span class="built_in">add</span>(<span class="built_in">map</span>);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> resultList;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> onPostExecute(List&lt;Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt;&gt; resultList) &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">super</span>.onPostExecute(resultList);</span><br><span class="line">		adapter = <span class="keyword">new</span> MyAdapter(resultList);    <span class="comment">//将解析后生成的list数据传入到adapter中</span></span><br><span class="line">		listView.setAdapter(adapter);</span><br><span class="line">		adapter.notifyDataSetChanged();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
+</code></pre><p>adapter的代码如下：</p>
+<pre><code><span class="comment"><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">class <span class="type">MyAdapter</span> extends <span class="type">BaseAdapter</span> &#123;</span><br><span class="line"></span><br><span class="line">	private <span class="type">List</span>&lt;<span class="type">Map</span>&lt;<span class="type">String</span>, <span class="type">String</span>&gt;&gt; <span class="literal">result</span>;</span><br><span class="line"></span><br><span class="line">	public <span class="type">MyAdapter</span>(<span class="type">List</span>&lt;<span class="type">Map</span>&lt;<span class="type">String</span>, <span class="type">String</span>&gt;&gt; <span class="literal">result</span>) &#123;</span><br><span class="line">		this.<span class="literal">result</span> = <span class="literal">result</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@<span class="type">Override</span></span><br><span class="line">	public <span class="type">int</span> getCount() &#123;</span><br><span class="line">		// <span class="type">TODO</span> <span class="type">Auto</span>-generated <span class="keyword">method</span> stub</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">result</span>.size();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@<span class="type">Override</span></span><br><span class="line">	public <span class="type">Object</span> getItem(<span class="type">int</span> position) &#123;</span><br><span class="line">		// <span class="type">TODO</span> <span class="type">Auto</span>-generated <span class="keyword">method</span> stub</span><br><span class="line">		<span class="keyword">return</span> null;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@<span class="type">Override</span></span><br><span class="line">	public long getItemId(<span class="type">int</span> position) &#123;</span><br><span class="line">		// <span class="type">TODO</span> <span class="type">Auto</span>-generated <span class="keyword">method</span> stub</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@<span class="type">Override</span></span><br><span class="line">	public <span class="type">View</span> getView(<span class="type">int</span> position, <span class="type">View</span> convertView, <span class="type">ViewGroup</span> arg2) &#123;</span><br><span class="line">		<span class="type">View</span> view = null;</span><br><span class="line">		<span class="type">ViewHolder</span> holder;</span><br><span class="line">		<span class="keyword">if</span> (convertView == null) &#123;</span><br><span class="line">			view = <span class="type">View</span>.inflate(<span class="type">MainActivity</span>.this, R.layout.item, null);</span><br><span class="line">			holder = new <span class="type">ViewHolder</span>();</span><br><span class="line">			holder.title = (<span class="type">TextView</span>) view.findViewById(R.id.title);</span><br><span class="line">			holder.description = (<span class="type">TextView</span>) view.findViewById(R.id.description);</span><br><span class="line">			holder.imageView = (<span class="type">ImageView</span>) view.findViewById(R.id.imageView);</span><br><span class="line">			view.setTag(holder);</span><br><span class="line"></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			view = convertView;</span><br><span class="line">			holder = (<span class="type">ViewHolder</span>) view.getTag();</span><br><span class="line">		&#125;</span><br><span class="line">		holder.title.setText(<span class="literal">result</span>.get(position).get(<span class="string">"title"</span>));</span><br><span class="line">		holder.description.setText(<span class="literal">result</span>.get(position).get(<span class="string">"description"</span>));</span><br><span class="line"></span><br><span class="line">		//使用<span class="type">Universal</span> <span class="type">ImageLoader</span>获取图片</span><br><span class="line">		<span class="type">ImageLoader</span>.getInstance().displayImage(<span class="literal">result</span>.get(position).get(<span class="string">"picUrl"</span>), holder.imageView, options);   </span><br><span class="line">		<span class="keyword">return</span> view;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//使用<span class="type">ViewHolder</span>存储view，使其不必每次都到布局文件中查找view，提升了效率</span><br><span class="line"><span class="keyword">static</span> class <span class="type">ViewHolder</span> &#123;</span><br><span class="line">	<span class="type">TextView</span> title;</span><br><span class="line">	<span class="type">TextView</span> description;</span><br><span class="line">	<span class="type">ImageView</span> imageView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
+</code></pre><p>这样就可以以图文混排的形式将新闻显示到listview中了，后续功能可自行添加。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Android/">Android</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/09/20/API Store的使用/" data-title="Api Store的使用 | 我的博客" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/09/17/Universal ImageLoader图片异步加载类库/"  title="Universal ImageLoader图片异步加载类库的学习">
+ <strong>下一篇：</strong><br/> 
+ <span>Universal ImageLoader图片异步加载类库的学习
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://github.com/MishuaiNiou" target="_blank" title="Github">Github</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello , I&#39;m Michael . I&#39;m an android developer .  <br/>
+			Stay hungry , Stay foolish ! </p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="MiShuai">MiShuai</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
